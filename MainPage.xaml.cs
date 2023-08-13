@@ -1,9 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using Windows.Foundation;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
+﻿using Windows.UI.Xaml.Controls;
 
 namespace EldenTracker
 {
@@ -12,90 +7,85 @@ namespace EldenTracker
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        private IMap _map;
-        private ScrollViewer _scrollViewer;
-        private Image _mapImage;
-
-        private Point startPoint;
-        private Point startOffset;
-        private Point zoomCenter;
+        //private bool IsToggleOn = true;
+        private IMap Map { get; set; }
 
         public MainPage()
         {
             InitializeComponent();
+            CreateComponents();
 
-            _scrollViewer = scrollViewer; // Replace with your ScrollViewer's x:Name
-            _mapImage = mapImage;
+            mapImage.PointerPressed += Map.MapImage_PointerPressed;
+            mapImage.PointerMoved += Map.MapImage_PointerMoved;
+            mapImage.PointerReleased += Map.MapImage_PointerReleased;
 
-            _map = new Map(scrollViewer, mapImage);
+            //Window.Current.CoreWindow.KeyDown += CoreWindow_KeyDown;
 
-            mapImage.PointerPressed += MapImage_PointerPressed;
-            mapImage.PointerMoved += MapImage_PointerMoved;
-            mapImage.PointerReleased += MapImage_PointerReleased;
+
+            //var bitmapImage = new BitmapImage
+            //{
+            //    UriSource = new Uri("C:\\Users\\parti\\source\\repos\\EldenTracker\\bin\\x64\\Debug\\Resources\\Map\\Images\\Underground.png")
+            //};
+            //bitmapImage.ImageOpened += (s, e) =>
+            //{
+            //    Here, you can access the Width and Height properties
+            //    double imageWidth = bitmapImage.PixelWidth;
+            //    double imageHeight = bitmapImage.PixelHeight;
+
+            //    Update the Image control with the loaded BitmapImage
+            //    mapImage.Source = bitmapImage;
+            //};
         }
 
-        private void MapImage_PointerPressed(object sender, PointerRoutedEventArgs e)
+        private void CreateComponents()
         {
-            // Capture pointer and store initial position
-            mapImage.CapturePointer(e.Pointer);
-            startPoint = e.GetCurrentPoint(mapImage).Position;
-            startOffset = new Point(scrollViewer.HorizontalOffset, scrollViewer.VerticalOffset);
+            Map = new Map(scrollViewer, mapImage);
         }
 
-        private void MapImage_PointerMoved(object sender, PointerRoutedEventArgs e)
-        {
-            if (e.GetCurrentPoint(mapImage).Properties.IsLeftButtonPressed)
-            {
-                // Calculate new offset based on pointer movement
-                Point currentPosition = e.GetCurrentPoint(mapImage).Position;
-                double offsetX = startOffset.X + (startPoint.X - currentPosition.X);
-                double offsetY = startOffset.Y + (startPoint.Y - currentPosition.Y);
+        //TODO: Realize switching maps by pressing N key on keyboard (XAML too)
+        //private async void CoreWindow_KeyDown(CoreWindow sender, KeyEventArgs args)
+        //{
+        //    await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+        //    {
+        //        if (args.VirtualKey == VirtualKey.N)
+        //        {
+        //            // Toggle between two image paths
+        //            if (IsToggleOn)
+        //            {
+        //                var bitmapImage = new BitmapImage
+        //                {
+        //                    UriSource = new Uri("C:\\Users\\parti\\source\\repos\\EldenTracker\\bin\\x64\\Debug\\Resources\\Map\\Images\\Underground.png")
+        //                };
+        //                bitmapImage.ImageOpened += (s, e) =>
+        //                {
+        //                    // Here, you can access the Width and Height properties
+        //                    double imageWidth = bitmapImage.PixelWidth;
+        //                    double imageHeight = bitmapImage.PixelHeight;
 
-                // Update the ScrollViewer's offset
-                scrollViewer.ChangeView(offsetX, offsetY, null, false);
-            }
-        }
+        //                    // Update the Image control with the loaded BitmapImage
+        //                    mapImage.Source = bitmapImage;
+        //                };
+        //            }
+        //            else
+        //            {
+        //                var bitmapImage = new BitmapImage();
+        //                bitmapImage.UriSource = new Uri("ms-appx:///bin//x64//Debug//Resources//Map//Images//Original.png");
+        //                bitmapImage.ImageOpened += (s, e) =>
+        //                {
+        //                    // Here, you can access the Width and Height properties
+        //                    double imageWidth = bitmapImage.PixelWidth;
+        //                    double imageHeight = bitmapImage.PixelHeight;
 
-        private void MapImage_PointerReleased(object sender, PointerRoutedEventArgs e)
-        {
-            // Release the captured pointer
-            mapImage.ReleasePointerCapture(e.Pointer);
-        }
+        //                    // Update the Image control with the loaded BitmapImage
+        //                    mapImage.Source = bitmapImage;
+        //                };
+        //            }
 
-        private async void MapImage_PointerWheelChanged(object sender, PointerRoutedEventArgs e)
-        {
-            // Disable ScrollViewer's scrolling temporarily
-            scrollViewer.HorizontalScrollMode = ScrollMode.Disabled;
-            scrollViewer.VerticalScrollMode = ScrollMode.Disabled;
-
-            try
-            {
-                int wheelDelta = e.GetCurrentPoint(mapImage).Properties.MouseWheelDelta;
-                double zoomFactor = 1.1;
-                double currentScale = (mapImage.RenderTransform as ScaleTransform).ScaleX;
-                double newScale = wheelDelta > 0 ? currentScale * zoomFactor : currentScale / zoomFactor;
-
-                // Limit the zoom factor (optional)
-                double minScale = 0.5;
-                double maxScale = 3.0;
-                newScale = Math.Max(minScale, Math.Min(maxScale, newScale));
-
-                // Apply the new scale to the ScaleTransform
-                (mapImage.RenderTransform as ScaleTransform).ScaleX = newScale;
-                (mapImage.RenderTransform as ScaleTransform).ScaleY = newScale;
-
-                Point relativeZoomCenter = e.GetCurrentPoint(mapImage).Position;
-                double offsetX = relativeZoomCenter.X * (1 - newScale) + zoomCenter.X;
-                double offsetY = relativeZoomCenter.Y * (1 - newScale) + zoomCenter.Y;
-                scrollViewer.ChangeView(offsetX, offsetY, null, false);
-            }
-            finally
-            {
-                // Re-enable ScrollViewer's scrolling
-                await Task.Delay(10); // Allow a small delay for the layout to update
-                scrollViewer.HorizontalScrollMode = ScrollMode.Auto;
-                scrollViewer.VerticalScrollMode = ScrollMode.Auto;
-            }
-        }
+        //            // Toggle the state
+        //            IsToggleOn = !IsToggleOn;
+        //        }
+        //        UpdateLayout(); // Update the entire page
+        //    });
+        //}
     }
 }

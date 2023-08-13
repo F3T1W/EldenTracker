@@ -10,6 +10,11 @@
 
     <ScrollViewer x:Name="scrollViewer" ManipulationMode="All" ZoomMode="Enabled" HorizontalScrollMode="Enabled" VerticalScrollMode="Enabled" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
         <Image x:Name="mapImage" Source="Resources/Map/Images/Original.png" Stretch="Uniform">
+            <!--
+            <Image.RenderTransform>
+                <ScaleTransform ScaleX="1" ScaleY="1" />
+            </Image.RenderTransform>
+            -->
         </Image>
     </ScrollViewer> 
 </Page>
