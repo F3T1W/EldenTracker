@@ -8,7 +8,19 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <ScrollViewer x:Name="scrollViewer" ManipulationMode="All" ZoomMode="Enabled" HorizontalScrollMode="Enabled" VerticalScrollMode="Enabled" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-        <Image x:Name="mapImage" Source="Resources/Map/Images/FullMap.png" Stretch="Uniform"/>
-    </ScrollViewer> 
+    <Grid>
+        <Grid>
+            <ScrollViewer x:Name="scrollViewer" ManipulationMode="All" ZoomMode="Enabled" HorizontalScrollMode="Enabled" VerticalScrollMode="Enabled" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                <Image x:Name="mapImage" Source="Resources/Map/Images/FullMap.png" Stretch="Uniform"/>
+            </ScrollViewer>
+        </Grid>
+        <Grid>
+            <Grid x:Name="LeftPanelGrid" Visibility="Collapsed" HorizontalAlignment="Left" Background="Black" Width="500">
+                <!-- Your left panel content here -->
+            </Grid>
+            <Grid x:Name="ButtonGrid" Margin="0, 40, 0, 0" HorizontalAlignment="Left" VerticalAlignment="Top">
+                <Button x:Name="ToggleGridButton" Content="Show Grid" Click="ToggleGridButton_Click" Background="Black"/>
+            </Grid>
+        </Grid>
+    </Grid>
 </Page>
