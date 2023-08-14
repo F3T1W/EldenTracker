@@ -4,18 +4,31 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="using:EldenTracker.Resources.PointsOfInterest"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
         <Grid>
             <ScrollViewer x:Name="ScrollViewer"
-                          ZoomMode="Enabled"
-                          HorizontalScrollBarVisibility="Auto"
-                          VerticalScrollBarVisibility="Auto">
-                <Image x:Name="MapImage"
-                       Source="Resources/Map/Images/FullMap.png"
-                       Stretch="Uniform"/>
+              ManipulationMode="All"
+              ZoomMode="Enabled"
+              HorizontalScrollMode="Enabled"
+              VerticalScrollMode="Enabled"
+              HorizontalScrollBarVisibility="Auto"
+              VerticalScrollBarVisibility="Auto">
+                <Grid>
+                    <Image x:Name="MapImage"
+                           Source="Resources/Map/Images/FullMap.png"
+                           Stretch="Uniform"/>
+                    <ItemsControl ItemsSource="{x:Bind PointsOfInterest}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate x:DataType="local:PointOfInterest">
+                                <local:PointOfInterestControl ImageSource="{x:Bind ImageSource}" XCoordinate="{x:Bind XCoordinate}" YCoordinate="{x:Bind YCoordinate}"/>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </Grid>
             </ScrollViewer>
         </Grid>
         <Grid>

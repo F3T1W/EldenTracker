@@ -1,4 +1,6 @@
-﻿using Windows.UI.Xaml;
+﻿using EldenTracker.Resources.PointsOfInterest;
+using System.Collections.ObjectModel;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 namespace EldenTracker
@@ -8,6 +10,7 @@ namespace EldenTracker
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        public ObservableCollection<PointOfInterest> PointsOfInterest { get; } = new ObservableCollection<PointOfInterest>();
         private IMap Map { get; set; }
 
         public MainPage()
@@ -15,6 +18,8 @@ namespace EldenTracker
             InitializeComponent();
             CreateComponents();
             EventHandlerLink();
+
+            PointsOfInterest.Add(new PointOfInterest(new System.Uri("ms-appx:///Resources/PointsOfInterest/Images/SoG.png"), 2500, 2500));//{ ImageSource = "ms-appx:///Resources/PointsOfInterest/Images/SoG.png" });
         }
 
         private void CreateComponents()
