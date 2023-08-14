@@ -1,4 +1,5 @@
 using Windows.Foundation;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 
@@ -41,5 +42,18 @@ public class Map : IMap
     {
         // Release the captured pointer
         MapImage.ReleasePointerCapture(e.Pointer);
+    }
+
+    public void MapImage_SizeChanged(object sender, SizeChangedEventArgs e)
+    {
+        // This event is raised when the image has been measured and arranged
+        double initialHorizontalOffset = (MapImage.ActualWidth - ScrollViewer.ActualWidth) / 3;
+        double initialVerticalOffset = (MapImage.ActualHeight - ScrollViewer.ActualHeight) / 2;
+
+        // Set the initial scroll position
+        ScrollViewer.ChangeView(initialHorizontalOffset, initialVerticalOffset, null);
+
+        // Unsubscribe from the event, as we only need to do this once
+        MapImage.SizeChanged -= MapImage_SizeChanged;
     }
 }
