@@ -1,12 +1,9 @@
-using System;
 using Windows.Foundation;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media.Imaging;
 
 public class Map : IMap
 {
-    private bool IsToggleOn { get; set; }
     private Point StartPoint { get; set; }
     private Point StartOffset { get; set; }
     public ScrollViewer ScrollViewer { private get; set; }
@@ -16,7 +13,6 @@ public class Map : IMap
     {
         ScrollViewer = scrollViewer;
         MapImage = mapImage;
-        IsToggleOn = true;
     }
 
     public void MapImage_PointerPressed(object sender, PointerRoutedEventArgs e)
@@ -45,25 +41,5 @@ public class Map : IMap
     {
         // Release the captured pointer
         MapImage.ReleasePointerCapture(e.Pointer);
-    }
-
-    //TODO: Realize switching maps by pressing N key on keyboard
-    public void MapImageChange_KeyDown(object sender, KeyRoutedEventArgs e)
-    {
-        if (e.Key == Windows.System.VirtualKey.N)
-        {
-            // Toggle between two image paths
-            if (IsToggleOn)
-            {
-                MapImage.Source = new BitmapImage(new Uri("ms-appx:///bin//x64//Debug//Resources//Map//Images//Underground.png"));
-            }
-            else
-            {
-                MapImage.Source = new BitmapImage(new Uri("ms-appx:///bin//x64//Debug//Resources//Map//Images//Original.png"));
-            }
-
-            // Toggle the state
-            IsToggleOn = !IsToggleOn;
-        }
     }
 }
