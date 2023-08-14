@@ -19,15 +19,22 @@ namespace EldenTracker
 
         private void CreateComponents()
         {
-            Map = new Map(scrollViewer, mapImage);
+            Map = new Map(ScrollViewer, MapImage);
         }
 
         private void EventHandlerLink()
         {
-            mapImage.SizeChanged += Map.MapImage_SizeChanged;
-            mapImage.PointerPressed += Map.MapImage_PointerPressed;
-            mapImage.PointerMoved += Map.MapImage_PointerMoved;
-            mapImage.PointerReleased += Map.MapImage_PointerReleased;
+            MapEventHandlerLink();
+
+            ToggleGridButton.Click += ToggleGridButton_Click;
+        }
+
+        private void MapEventHandlerLink()
+        {
+            MapImage.SizeChanged += Map.MapImage_SizeChanged;
+            MapImage.PointerPressed += Map.MapImage_PointerPressed;
+            MapImage.PointerMoved += Map.MapImage_PointerMoved;
+            MapImage.PointerReleased += Map.MapImage_PointerReleased;
         }
 
         private void ToggleGridButton_Click(object sender, RoutedEventArgs e)
