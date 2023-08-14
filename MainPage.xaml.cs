@@ -19,7 +19,11 @@ namespace EldenTracker
             CreateComponents();
             EventHandlerLink();
 
-            PointsOfInterest.Add(new PointOfInterest(new System.Uri("ms-appx:///Resources/PointsOfInterest/Images/SoG.png"), 2500, 2500));//{ ImageSource = "ms-appx:///Resources/PointsOfInterest/Images/SoG.png" });
+            PointsOfInterest.Add(new PointOfInterest(2000, 2000));
+            PointsOfInterest.Add(new PointOfInterest(2500, 2500));
+            PointsOfInterest.Add(new PointOfInterest(3000, 3000));
+            PointsOfInterest.Add(new PointOfInterest(3500, 3500));
+            PointsOfInterest.Add(new PointOfInterest(4000, 4000));
         }
 
         private void CreateComponents()
