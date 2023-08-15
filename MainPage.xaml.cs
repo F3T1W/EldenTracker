@@ -1,5 +1,7 @@
 ﻿using EldenTracker.Resources.PointsOfInterest;
+using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -60,6 +62,20 @@ namespace EldenTracker
                 ButtonGrid.Margin = new Thickness(0, 40, 0, 0);
                 ToggleGridButton.HorizontalAlignment = HorizontalAlignment.Left;
             }
+        }
+
+        private void ScrollViewer_RightTapped(object sender, Windows.UI.Xaml.Input.RightTappedRoutedEventArgs e)
+        {
+            // Get the position of the right-click event relative to the ScrollViewer
+            Windows.Foundation.Point position = e.GetPosition(MapImage);
+
+
+            // Convert the position to the actual coordinates on the map
+            double xCoordinate = position.X - 16;
+            double yCoordinate = position.Y - 16;
+
+            // Create a new PointOfInterest instance with the calculated coordinates
+            PointsOfInterest.Add(new PointOfInterest(xCoordinate, yCoordinate));
         }
     }
 }
