@@ -6,10 +6,10 @@ namespace EldenTracker.Resources.PointsOfInterest
     public sealed partial class PointOfInterestControl : UserControl
     {
         public static readonly DependencyProperty ImageSourceProperty =
-        DependencyProperty.Register("ImageSource", typeof(string), typeof(PointOfInterestControl), new PropertyMetadata(null));
+            DependencyProperty.Register("ImageSource", typeof(string), typeof(PointOfInterestControl), new PropertyMetadata(null));
 
         public static readonly DependencyProperty XCoordinateProperty =
-    DependencyProperty.Register("XCoordinate", typeof(double), typeof(PointOfInterest), new PropertyMetadata(0.0));
+            DependencyProperty.Register("XCoordinate", typeof(double), typeof(PointOfInterest), new PropertyMetadata(0.0));
 
         public static readonly DependencyProperty YCoordinateProperty =
             DependencyProperty.Register("YCoordinate", typeof(double), typeof(PointOfInterest), new PropertyMetadata(0.0));
