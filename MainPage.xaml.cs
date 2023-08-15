@@ -1,7 +1,5 @@
 ﻿using EldenTracker.Resources.PointsOfInterest;
-using System;
 using System.Collections.ObjectModel;
-using System.Linq;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -21,11 +19,11 @@ namespace EldenTracker
             CreateComponents();
             EventHandlerLink();
 
-            PointsOfInterest.Add(new PointOfInterest(2000, 2000));
-            PointsOfInterest.Add(new PointOfInterest(2500, 2500));
-            PointsOfInterest.Add(new PointOfInterest(3000, 3000));
-            PointsOfInterest.Add(new PointOfInterest(3500, 3500));
-            PointsOfInterest.Add(new PointOfInterest(4000, 4000));
+            PointsOfInterest.Add(new PointOfInterest(2000, 2000, PointOfInterestType.Default));
+            PointsOfInterest.Add(new PointOfInterest(2500, 2500, PointOfInterestType.Default));
+            PointsOfInterest.Add(new PointOfInterest(3000, 3000, PointOfInterestType.Default));
+            PointsOfInterest.Add(new PointOfInterest(3500, 3500, PointOfInterestType.Default));
+            PointsOfInterest.Add(new PointOfInterest(4000, 4000, PointOfInterestType.Default));
         }
 
         private void CreateComponents()
@@ -75,7 +73,7 @@ namespace EldenTracker
             double yCoordinate = position.Y - 16;
 
             // Create a new PointOfInterest instance with the calculated coordinates
-            PointsOfInterest.Add(new PointOfInterest(xCoordinate, yCoordinate));
+            PointsOfInterest.Add(new PointOfInterest(xCoordinate, yCoordinate, PointOfInterestType.Custom));
         }
     }
 }

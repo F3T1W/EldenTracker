@@ -7,16 +7,28 @@ namespace EldenTracker.Resources.PointsOfInterest
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private const string imagePath = "ms-appx:///Resources/PointsOfInterest/Images/SoG.png";
         public Uri ImageSource { get; set; }
         public double XCoordinate { get; set; }
         public double YCoordinate { get; set; }
 
-        public PointOfInterest(double xCoordinate, double yCoordinate)
+        public PointOfInterest(double xCoordinate, double yCoordinate, PointOfInterestType type)
         {
-            ImageSource = new Uri(imagePath);
             XCoordinate = xCoordinate;
             YCoordinate = yCoordinate;
+            ImageSource = new Uri(GetImagePath(type));
+        }
+
+        private string GetImagePath(PointOfInterestType type)
+        {
+            switch (type)
+            {
+                case PointOfInterestType.Default:
+                    return "ms-appx:///Resources/PointsOfInterest/Images/DefaultPoint.png";
+                case PointOfInterestType.Custom:
+                    return "ms-appx:///Resources/PointsOfInterest/Images/CustomPoint.png";
+                default:
+                    return string.Empty;
+            }
         }
 
         public void OnPropertyChanged(string propertyName)

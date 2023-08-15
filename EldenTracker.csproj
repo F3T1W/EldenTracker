@@ -129,6 +129,7 @@
     <Compile Include="Resources\PointsOfInterest\PointOfInterestControl.xaml.cs">
       <DependentUpon>PointOfInterestControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Resources\PointsOfInterest\PointOfInterestType.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -150,7 +151,8 @@
     <Content Include="Assets\StoreLogo.png" />
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
     <Content Include="Resources\Map\Images\FullMap.png" />
-    <Content Include="Resources\PointsOfInterest\Images\SoG.png" />
+    <Content Include="Resources\PointsOfInterest\Images\CustomPoint.png" />
+    <Content Include="Resources\PointsOfInterest\Images\DefaultPoint.png" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
