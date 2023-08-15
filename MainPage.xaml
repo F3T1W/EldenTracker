@@ -16,7 +16,8 @@
               HorizontalScrollMode="Enabled"
               VerticalScrollMode="Enabled"
               HorizontalScrollBarVisibility="Auto"
-              VerticalScrollBarVisibility="Auto">
+              VerticalScrollBarVisibility="Auto"
+              RightTapped="ScrollViewer_RightTapped">
                 <Grid>
                     <Image x:Name="MapImage"
                            Source="Resources/Map/Images/FullMap.png"

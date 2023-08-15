@@ -19,11 +19,11 @@ namespace EldenTracker
             CreateComponents();
             EventHandlerLink();
 
-            PointsOfInterest.Add(new PointOfInterest(2000, 2000));
-            PointsOfInterest.Add(new PointOfInterest(2500, 2500));
-            PointsOfInterest.Add(new PointOfInterest(3000, 3000));
-            PointsOfInterest.Add(new PointOfInterest(3500, 3500));
-            PointsOfInterest.Add(new PointOfInterest(4000, 4000));
+            PointsOfInterest.Add(new PointOfInterest(2000, 2000, PointOfInterestType.Default));
+            PointsOfInterest.Add(new PointOfInterest(2500, 2500, PointOfInterestType.Default));
+            PointsOfInterest.Add(new PointOfInterest(3000, 3000, PointOfInterestType.Default));
+            PointsOfInterest.Add(new PointOfInterest(3500, 3500, PointOfInterestType.Default));
+            PointsOfInterest.Add(new PointOfInterest(4000, 4000, PointOfInterestType.Default));
         }
 
         private void CreateComponents()
@@ -60,6 +60,20 @@ namespace EldenTracker
                 ButtonGrid.Margin = new Thickness(0, 40, 0, 0);
                 ToggleGridButton.HorizontalAlignment = HorizontalAlignment.Left;
             }
+        }
+
+        private void ScrollViewer_RightTapped(object sender, Windows.UI.Xaml.Input.RightTappedRoutedEventArgs e)
+        {
+            // Get the position of the right-click event relative to the ScrollViewer
+            Windows.Foundation.Point position = e.GetPosition(MapImage);
+
+
+            // Convert the position to the actual coordinates on the map
+            double xCoordinate = position.X - 16;
+            double yCoordinate = position.Y - 16;
+
+            // Create a new PointOfInterest instance with the calculated coordinates
+            PointsOfInterest.Add(new PointOfInterest(xCoordinate, yCoordinate, PointOfInterestType.Custom));
         }
     }
 }
