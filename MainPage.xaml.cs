@@ -20,7 +20,9 @@ namespace EldenTracker
         public MainPage()
         {
             InitializeComponent();
+
             CreateComponents();
+            LinkEvents();
 
             PointsOfInterest.Add(new PointOfInterest(new Point(2000, 2000)));
             PointsOfInterest.Add(new PointOfInterest(new Point(2500, 2500)));
