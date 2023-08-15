@@ -23,7 +23,4 @@ jobs:
         run: nuget restore
 
       - name: Build UWP project
-        run: msbuild /t:Restore,Build /p:Configuration=Release /p:Platform=x86 EldenTracker.csproj
-
-      - name: Create app package
-        run: msbuild /t:Package /p:Configuration=Release /p:Platform=x86 EldenTracker.csproj
+        run: msbuild
