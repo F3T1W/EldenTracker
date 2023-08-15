@@ -1,4 +1,4 @@
-name: .NET Build and Test
+name: UWP Build and Package
 
 on:
   push:
@@ -9,24 +9,21 @@ on:
       - develop
 
 jobs:
-  build-and-test:
+  build:
     runs-on: windows-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-    - name: Set up .NET
-      uses: actions/setup-dotnet@v2
-      with:
-        dotnet-version: '6.0.x'
+      - name: Set up MSBuild
+        uses: microsoft/setup-msbuild@v1
 
-    - name: Restore NuGet packages
-      run: dotnet restore
+      - name: Restore NuGet packages
+        run: nuget restore
 
-    - name: Build
-      run: dotnet build --configuration Release
+      - name: Build UWP project
+        run: msbuild /t:Restore,Build /p:Configuration=Release /p:Platform=x86 EldenTracker.csproj
 
-    - name: Test
-      run: dotnet test --configuration Release
-
+      - name: Create app package
+        run: msbuild /t:Package /p:Configuration=Release /p:Platform=x86 EldenTracker.csproj
