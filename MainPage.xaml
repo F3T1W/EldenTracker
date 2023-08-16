@@ -8,16 +8,59 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
+    <Page.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="Background" Value="Black" />
+            <Setter Property="BorderBrush" Value="Black" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Padding" Value="10,5" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal" />
+                                    <VisualState x:Name="PointerOver">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter"
+                                                                           Storyboard.TargetProperty="Foreground">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="Pink" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <Border x:Name="Border"
+                                    Background="{TemplateBinding Background}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}">
+                                <ContentPresenter x:Name="ContentPresenter"
+                                                  Content="{TemplateBinding Content}"
+                                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                  AutomationProperties.AccessibilityView="Raw" />
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+
     <Grid>
         <Grid>
             <ScrollViewer x:Name="ScrollViewer"
-              ManipulationMode="All"
-              ZoomMode="Enabled"
-              HorizontalScrollMode="Enabled"
-              VerticalScrollMode="Enabled"
-              HorizontalScrollBarVisibility="Auto"
-              VerticalScrollBarVisibility="Auto"
-              RightTapped="ScrollViewer_RightTapped">
+                          ManipulationMode="All"
+                          ZoomMode="Enabled"
+                          HorizontalScrollMode="Enabled"
+                          VerticalScrollMode="Enabled"
+                          HorizontalScrollBarVisibility="Auto"
+                          VerticalScrollBarVisibility="Auto"
+                          RightTapped="ScrollViewer_RightTapped">
                 <Grid>
                     <Image x:Name="MapImage"
                            Source="Resources/Map/Images/FullMap.png"
@@ -32,22 +75,29 @@
                 </Grid>
             </ScrollViewer>
         </Grid>
-        <Grid>
-            <Grid x:Name="LeftPanelGrid"
-                  Width="500"
-                  HorizontalAlignment="Left"
-                  Background="Black"
-                  Visibility="Collapsed">
-                <!--TODO: Add left panel content-->
-            </Grid>
-            <Grid x:Name="ButtonGrid"
-                  HorizontalAlignment="Left"
-                  VerticalAlignment="Top"
-                  Margin="0, 40, 0, 0">
-                <Button x:Name="ToggleGridButton"
-                        Content="Show Grid"
-                        Background="Black"/>
-            </Grid>
-        </Grid>
+        <SplitView x:Name="LeftPanelSplitView"
+                   Width="0"
+                   HorizontalAlignment="Left"
+                   DisplayMode="CompactOverlay"
+                   Background="Black"
+                   PanePlacement="Left">
+            <SplitView.Pane>
+                <StackPanel>
+                    <!-- No content here -->
+                </StackPanel>
+            </SplitView.Pane>
+            <SplitView.Content>
+                <Grid>
+                    <!-- Future content here -->
+                </Grid>
+            </SplitView.Content>
+        </SplitView>
+        <Button x:Name="ToggleSplitViewButton"
+                Width="75"
+                Height="30"
+                Content="Menu"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Margin="0, 40, 0, 0"/>
     </Grid>
 </Page>

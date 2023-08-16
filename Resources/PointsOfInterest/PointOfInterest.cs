@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using Windows.Foundation;
 
 namespace EldenTracker.Resources.PointsOfInterest
 {
@@ -11,10 +12,10 @@ namespace EldenTracker.Resources.PointsOfInterest
         public double XCoordinate { get; set; }
         public double YCoordinate { get; set; }
 
-        public PointOfInterest(double xCoordinate, double yCoordinate, PointOfInterestType type)
+        public PointOfInterest(Point point, PointOfInterestType type = PointOfInterestType.Default)
         {
-            XCoordinate = xCoordinate;
-            YCoordinate = yCoordinate;
+            XCoordinate = point.X;
+            YCoordinate = point.Y;
             ImageSource = new Uri(GetImagePath(type));
         }
 
