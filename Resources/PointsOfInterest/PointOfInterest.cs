@@ -4,8 +4,18 @@ using Windows.Foundation;
 
 namespace EldenTracker.Resources.PointsOfInterest
 {
-    public class PointOfInterest
+    public class PointOfInterest : INotifyPropertyChanged
     {
+        private string _description;
+        public string Description
+        {
+            get => _description;
+            set
+            {
+                _description = value;
+                OnPropertyChanged(nameof(Description));
+            }
+        }
         public event PropertyChangedEventHandler PropertyChanged;
 
         public Uri ImageSource { get; set; }

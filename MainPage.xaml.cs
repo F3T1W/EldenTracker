@@ -1,10 +1,15 @@
 ﻿using EldenTracker.Resources.Map;
 using EldenTracker.Resources.MenuButton;
 using EldenTracker.Resources.PointsOfInterest;
+using System;
 using System.Collections.ObjectModel;
 using Windows.Foundation;
+using Windows.UI;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
 
 namespace EldenTracker
 {
@@ -16,6 +21,9 @@ namespace EldenTracker
         public ObservableCollection<PointOfInterest> PointsOfInterest { get; } = new ObservableCollection<PointOfInterest>();
         private Map Map { get; set; }
         private MenuButton MenuButton { get; set; }
+
+        public PointOfInterest SelectedPOI { get; set; } // Create the SelectedPOI property
+
 
         public MainPage()
         {
@@ -63,6 +71,75 @@ namespace EldenTracker
             double yCoordinate = position.Y - 16;
 
             PointsOfInterest.Add(new PointOfInterest(new Point(xCoordinate, yCoordinate), PointOfInterestType.Custom));
+        }
+
+        private async void PointOfInterestControl_PointOfInterestClicked(object sender, PointOfInterest e)
+        {
+            var contentStackPanel = new StackPanel();
+
+            var image = new Image
+            {
+                Source = new BitmapImage(new Uri(e.ImageSource.ToString())),
+                Width = 100, // Set appropriate width for your image
+                Height = 100 // Set appropriate height for your image
+            };
+
+            var caption1 = new TextBlock
+            {
+                Text = "Caption 1",
+                Foreground = new SolidColorBrush(Colors.White),
+                Margin = new Thickness(0, 0, 0, 10) // Add margin at the bottom
+            };
+
+            var checkBox = new CheckBox
+            {
+                Content = "Checkbox Caption",
+                Foreground = new SolidColorBrush(Colors.White),
+                Margin = new Thickness(0, 10, 0, 10) // Add margin at the top and bottom
+            };
+
+            var buttonStackPanel = new StackPanel
+            {
+                Orientation = Orientation.Horizontal,
+                HorizontalAlignment = HorizontalAlignment.Center,
+                Margin = new Thickness(0, 10, 0, 0) // Add margin at the top
+            };
+
+            var closeButton1 = new Button
+            {
+                Content = "Close",
+                Foreground = new SolidColorBrush(Colors.White),
+                Width = 0.4 * 300, // 40% of the desired width (300 is just a placeholder)
+                Margin = new Thickness(0.05 * 300, 0, 0.025 * 300, 0) // 5% space on the left, 2.5% on the right
+            };
+
+            var closeButton2 = new Button
+            {
+                Content = "Close",
+                Foreground = new SolidColorBrush(Colors.White),
+                Width = 0.4 * 300, // 40% of the desired width (300 is just a placeholder)
+                Margin = new Thickness(0.025 * 300, 0, 0.05 * 300, 0) // 2.5% space on the left, 5% on the right
+            };
+
+            buttonStackPanel.Children.Add(closeButton1);
+            buttonStackPanel.Children.Add(closeButton2);
+
+            contentStackPanel.Children.Add(image);
+            contentStackPanel.Children.Add(caption1);
+            contentStackPanel.Children.Add(checkBox);
+            contentStackPanel.Children.Add(buttonStackPanel);
+
+            var contentDialog = new ContentDialog
+            {
+                Title = "Point of Interest",
+                Content = contentStackPanel,
+                CloseButtonText = string.Empty // Hide the default Close button
+            };
+
+            closeButton1.Click += (s, args) => contentDialog.Hide();
+            closeButton2.Click += (s, args) => contentDialog.Hide();
+
+            await contentDialog.ShowAsync();
         }
     }
 }

@@ -1,10 +1,14 @@
-﻿using Windows.UI.Xaml;
+﻿using System;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Input;
 
 namespace EldenTracker.Resources.PointsOfInterest
 {
     public sealed partial class PointOfInterestControl : UserControl
     {
+        public event EventHandler<PointOfInterest> PointOfInterestClicked;
+
         public static readonly DependencyProperty ImageSourceProperty =
             DependencyProperty.Register("ImageSource", typeof(string), typeof(PointOfInterestControl), new PropertyMetadata(null));
 
@@ -35,6 +39,17 @@ namespace EldenTracker.Resources.PointsOfInterest
         public PointOfInterestControl()
         {
             InitializeComponent();
+            Tapped += PointOfInterestControl_Tapped;
+        }
+
+        private void PointOfInterestControl_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            var poi = DataContext as PointOfInterest;
+
+            if (poi != null && e.PointerDeviceType == Windows.Devices.Input.PointerDeviceType.Mouse)
+            {
+                PointOfInterestClicked?.Invoke(this, poi);
+            }
         }
     }
 }

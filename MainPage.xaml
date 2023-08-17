@@ -49,26 +49,31 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <Style TargetType="ContentDialog">
+            <Setter Property="Background" Value="Black"/>
+        </Style>
     </Page.Resources>
 
     <Grid>
         <Grid>
-            <ScrollViewer x:Name="ScrollViewer"
-                          ManipulationMode="All"
-                          ZoomMode="Enabled"
-                          HorizontalScrollMode="Enabled"
-                          VerticalScrollMode="Enabled"
-                          HorizontalScrollBarVisibility="Auto"
-                          VerticalScrollBarVisibility="Auto"
-                          RightTapped="ScrollViewer_RightTapped">
+            <ScrollViewer
+              x:Name="ScrollViewer"
+              ManipulationMode="All"
+              ZoomMode="Enabled"
+              HorizontalScrollMode="Enabled"
+              VerticalScrollMode="Enabled"
+              HorizontalScrollBarVisibility="Auto"
+              VerticalScrollBarVisibility="Auto"
+              RightTapped="ScrollViewer_RightTapped">
                 <Grid>
                     <Image x:Name="MapImage"
-                           Source="Resources/Map/Images/FullMap.png"
-                           Stretch="Uniform"/>
-                    <ItemsControl ItemsSource="{x:Bind PointsOfInterest}">
+               Source="Resources/Map/Images/FullMap.png"
+               Stretch="Uniform"/>
+                    <ItemsControl x:Name="PointsControl" ItemsSource="{x:Bind PointsOfInterest}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate x:DataType="local:PointOfInterest">
-                                <local:PointOfInterestControl ImageSource="{x:Bind ImageSource}" XCoordinate="{x:Bind XCoordinate}" YCoordinate="{x:Bind YCoordinate}"/>
+                                <local:PointOfInterestControl ImageSource="{x:Bind ImageSource}" XCoordinate="{x:Bind XCoordinate}" YCoordinate="{x:Bind YCoordinate}"
+                                               PointOfInterestClicked="PointOfInterestControl_PointOfInterestClicked"/>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
@@ -99,5 +104,9 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 Margin="0, 40, 0, 0"/>
+        <Popup x:Name="PopupInfo" IsOpen="False" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <TextBlock Foreground="Red" Padding="10" Text="JIJA BLYAT" Width="300" Height="150"/>
+        </Popup>
+
     </Grid>
 </Page>
