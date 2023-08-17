@@ -17,6 +17,9 @@ namespace EldenTracker
         private Map Map { get; set; }
         private MenuButton MenuButton { get; set; }
 
+        public PointOfInterest SelectedPOI { get; set; } // Create the SelectedPOI property
+
+
         public MainPage()
         {
             InitializeComponent();
@@ -29,6 +32,14 @@ namespace EldenTracker
             PointsOfInterest.Add(new PointOfInterest(new Point(3000, 3000)));
             PointsOfInterest.Add(new PointOfInterest(new Point(3500, 3500)));
             PointsOfInterest.Add(new PointOfInterest(new Point(4000, 4000)));
+
+            foreach (var poiControl in PointsControl.Items)
+            {
+                if (poiControl is PointOfInterestControl poiControlCast)
+                {
+                    poiControlCast.PointOfInterestClicked += PointOfInterestControl_PointOfInterestClicked;
+                }
+            }
         }
 
         /// <summary>
@@ -63,6 +74,12 @@ namespace EldenTracker
             double yCoordinate = position.Y - 16;
 
             PointsOfInterest.Add(new PointOfInterest(new Point(xCoordinate, yCoordinate), PointOfInterestType.Custom));
+        }
+
+        private void PointOfInterestControl_PointOfInterestClicked(object sender, PointOfInterest e)
+        {
+            PopupInfo.IsOpen = true;
+            SelectedPOI = e;
         }
     }
 }
