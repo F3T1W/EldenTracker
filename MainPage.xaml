@@ -73,7 +73,7 @@
                         <ItemsControl.ItemTemplate>
                             <DataTemplate x:DataType="local:PointOfInterest">
                                 <local:PointOfInterestControl ImageSource="{x:Bind ImageSource}" XCoordinate="{x:Bind XCoordinate}" YCoordinate="{x:Bind YCoordinate}"
-                                                  PointOfInterestClicked="PointOfInterestControl_PointOfInterestClicked"/>
+                                               PointOfInterestClicked="PointOfInterestControl_PointOfInterestClicked"/>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>

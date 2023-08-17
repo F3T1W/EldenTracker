@@ -1,11 +1,14 @@
 ﻿using EldenTracker.Resources.Map;
 using EldenTracker.Resources.MenuButton;
 using EldenTracker.Resources.PointsOfInterest;
+using System;
 using System.Collections.ObjectModel;
 using Windows.Foundation;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Media;
 
 namespace EldenTracker
 {
@@ -69,10 +72,16 @@ namespace EldenTracker
             PointsOfInterest.Add(new PointOfInterest(new Point(xCoordinate, yCoordinate), PointOfInterestType.Custom));
         }
 
-        private void PointOfInterestControl_PointOfInterestClicked(object sender, PointOfInterest e)
+        private async void PointOfInterestControl_PointOfInterestClicked(object sender, PointOfInterest e)
         {
-            SelectedPOI = e;
-            PopupInfo.IsOpen = true;
+            var contentDialog = new ContentDialog
+            {
+                Title = "Point of Interest",
+                Content = new TextBlock { Text = "Ну, привет!"/*e.Description*/, Foreground = new SolidColorBrush(Colors.White) },
+                CloseButtonText = "Close"
+            };
+
+            await contentDialog.ShowAsync();
         }
     }
 }
