@@ -14,4 +14,4 @@
 
 Everything you need is at hand.
 
-"All things can be connected" - Miriel
+"All things can be conjoined" - Miriel
