@@ -124,7 +124,6 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\Map\Map.cs" />
-    <Compile Include="Resources\MenuButton\MenuButton.cs" />
     <Compile Include="Resources\PointsOfInterest\PointOfInterest.cs" />
     <Compile Include="Resources\PointsOfInterest\PointOfInterestControl.xaml.cs">
       <DependentUpon>PointOfInterestControl.xaml</DependentUpon>

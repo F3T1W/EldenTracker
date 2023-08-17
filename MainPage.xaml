@@ -6,7 +6,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:local="using:EldenTracker.Resources.PointsOfInterest"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    Loaded="Page_Loaded">
 
     <Page.Resources>
         <Style TargetType="Button">
@@ -80,33 +81,19 @@
                 </Grid>
             </ScrollViewer>
         </Grid>
-        <SplitView x:Name="LeftPanelSplitView"
-                   Width="0"
-                   HorizontalAlignment="Left"
-                   DisplayMode="CompactOverlay"
-                   Background="Black"
-                   PanePlacement="Left">
-            <SplitView.Pane>
-                <StackPanel>
-                    <!-- No content here -->
-                </StackPanel>
-            </SplitView.Pane>
-            <SplitView.Content>
-                <Grid>
-                    <!-- Future content here -->
-                </Grid>
-            </SplitView.Content>
-        </SplitView>
-        <Button x:Name="ToggleSplitViewButton"
-                Width="75"
-                Height="30"
-                Content="Menu"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top"
-                Margin="0, 40, 0, 0"/>
-        <Popup x:Name="PopupInfo" IsOpen="False" VerticalAlignment="Center" HorizontalAlignment="Center">
-            <TextBlock Foreground="Red" Padding="10" Text="JIJA BLYAT" Width="300" Height="150"/>
-        </Popup>
+        
+        <Grid>
+            <NavigationView x:Name="LeftPanelNavigationView"
+                            Style="{StaticResource NavigationViewWithoutAnimation}">
+                <!-- Set IsPaneOpen to True -->
+                <!-- ... MenuItems and Frame ... -->
+            </NavigationView>
+        </Grid>
 
+        <Grid>
+            <Popup x:Name="PopupInfo" IsOpen="False" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <TextBlock Foreground="Red" Padding="10" Text="JIJA BLYAT" Width="300" Height="150"/>
+            </Popup>
+        </Grid>
     </Grid>
 </Page>

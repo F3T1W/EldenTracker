@@ -1,5 +1,4 @@
 ﻿using EldenTracker.Resources.Map;
-using EldenTracker.Resources.MenuButton;
 using EldenTracker.Resources.PointsOfInterest;
 using System;
 using System.Collections.ObjectModel;
@@ -20,8 +19,6 @@ namespace EldenTracker
     {
         public ObservableCollection<PointOfInterest> PointsOfInterest { get; } = new ObservableCollection<PointOfInterest>();
         private Map Map { get; set; }
-        private MenuButton MenuButton { get; set; }
-
         public PointOfInterest SelectedPOI { get; set; } // Create the SelectedPOI property
 
 
@@ -39,22 +36,20 @@ namespace EldenTracker
             PointsOfInterest.Add(new PointOfInterest(new Point(4000, 4000)));
         }
 
+
         /// <summary>
         /// Initialize all needed class Instances
         /// </summary>
         private void CreateComponents()
         {
-            Map = new Map(ScrollViewer, MapImage);
-            MenuButton = new MenuButton(LeftPanelSplitView, ToggleSplitViewButton);
+            Map = new Map(ScrollViewer, MapImage, LeftPanelNavigationView);
         }
 
         private void LinkEvents()
         {
             Map.MapEventHandlerLink(MapImage);
 
-            ToggleSplitViewButton.Click += MenuButton.ToggleSplitViewButton_Click;
-
-            ToggleSplitViewButton.RightTapped += ScrollViewer_RightTapped;
+            MapImage.RightTapped += ScrollViewer_RightTapped;
         }
 
 
@@ -140,6 +135,11 @@ namespace EldenTracker
             closeButton2.Click += (s, args) => contentDialog.Hide();
 
             await contentDialog.ShowAsync();
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            LeftPanelNavigationView.IsPaneOpen = false;
         }
     }
 }

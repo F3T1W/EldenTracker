@@ -13,11 +13,13 @@ namespace EldenTracker.Resources.Map {
         private Point StartOffset { get; set; }
         public ScrollViewer ScrollViewer { private get; set; }
         public Image MapImage { private get; set; }
+        public NavigationView NavigationView { private get; set; }
 
-        public Map(ScrollViewer scrollViewer, Image mapImage)
+        public Map(ScrollViewer scrollViewer, Image mapImage, NavigationView navigationView)
         {
             ScrollViewer = scrollViewer;
             MapImage = mapImage;
+            NavigationView = navigationView;
         }
 
         private void MapImage_PointerPressed(object sender, PointerRoutedEventArgs e)
@@ -36,6 +38,11 @@ namespace EldenTracker.Resources.Map {
                 Point currentPosition = e.GetCurrentPoint(MapImage).Position;
                 double offsetX = StartOffset.X + (StartPoint.X - currentPosition.X);
                 double offsetY = StartOffset.Y + (StartPoint.Y - currentPosition.Y);
+
+                if (offsetX < 0 || offsetX < 0)
+                {
+                    return;
+                }
 
                 // Update the ScrollViewer's offset
                 ScrollViewer.ChangeView(offsetX, offsetY, null, false);
