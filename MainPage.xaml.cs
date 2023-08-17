@@ -3,6 +3,7 @@ using EldenTracker.Resources.MenuButton;
 using EldenTracker.Resources.PointsOfInterest;
 using System.Collections.ObjectModel;
 using Windows.Foundation;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 
@@ -32,14 +33,6 @@ namespace EldenTracker
             PointsOfInterest.Add(new PointOfInterest(new Point(3000, 3000)));
             PointsOfInterest.Add(new PointOfInterest(new Point(3500, 3500)));
             PointsOfInterest.Add(new PointOfInterest(new Point(4000, 4000)));
-
-            foreach (var poiControl in PointsControl.Items)
-            {
-                if (poiControl is PointOfInterestControl poiControlCast)
-                {
-                    poiControlCast.PointOfInterestClicked += PointOfInterestControl_PointOfInterestClicked;
-                }
-            }
         }
 
         /// <summary>
@@ -78,8 +71,8 @@ namespace EldenTracker
 
         private void PointOfInterestControl_PointOfInterestClicked(object sender, PointOfInterest e)
         {
-            PopupInfo.IsOpen = true;
             SelectedPOI = e;
+            PopupInfo.IsOpen = true;
         }
     }
 }
