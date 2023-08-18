@@ -81,13 +81,8 @@
                 </Grid>
             </ScrollViewer>
         </Grid>
-        
-        <Grid>
-            <NavigationView x:Name="LeftPanelNavigationView"
-                            Style="{StaticResource NavigationViewWithoutAnimation}">
-                <!-- Set IsPaneOpen to True -->
-                <!-- ... MenuItems and Frame ... -->
-            </NavigationView>
+
+        <Grid x:Name="NavigationPanelGrid">
         </Grid>
 
         <Grid>

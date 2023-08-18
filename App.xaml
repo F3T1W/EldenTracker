@@ -8,8 +8,8 @@
         <SolidColorBrush x:Key="ButtonForegroundPointerOver">Pink</SolidColorBrush>
         <Style x:Key="NavigationViewWithoutAnimation" TargetType="NavigationView">
             <Setter Property="IsPaneOpen" Value="False" />
-            <Setter Property="CompactModeThresholdWidth" Value="350" />
-            <Setter Property="OpenPaneLength" Value="350" />
+            <Setter Property="CompactModeThresholdWidth" Value="130" />
+            <Setter Property="OpenPaneLength" Value="130" />
             <Setter Property="CompactPaneLength" Value="40"/>
         </Style>
     </Application.Resources>
