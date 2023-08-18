@@ -39,7 +39,7 @@ namespace EldenTracker.NavigationPages
             {
                 Name = "Page1NavItem",
                 Content = "Wiki",
-                Icon = new BitmapIcon { UriSource = new Uri("ms-appx:///Assets/wiki.png") }
+                Icon = new BitmapIcon { UriSource = new Uri("ms-appx:///Assets/wiki.png") },
             };
 
             NavigationViewItem Page2NavItem = new NavigationViewItem

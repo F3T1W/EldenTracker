@@ -148,6 +148,7 @@
     <Content Include="Assets\BadgeLogo.scale-200.png" />
     <Content Include="Assets\BadgeLogo.scale-400.png" />
     <Content Include="Assets\cross.png" />
+    <Content Include="Assets\floppa.jpg" />
     <Content Include="Assets\wiki.png" />
     <Content Include="Assets\settings.png" />
     <Content Include="Properties\Default.rd.xml" />

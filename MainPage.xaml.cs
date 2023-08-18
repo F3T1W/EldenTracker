@@ -155,6 +155,12 @@ namespace EldenTracker
                 CreateNavigationPanel(_contentFrame);
             }
 
+           (LeftPanelNavigationView.MenuItems[0] as NavigationViewItem).Tapped += (send, args) =>
+           {
+               _contentFrame.Navigate(typeof(Page1));
+               _contentFrame.BackStack.Clear(); // Clear back stack to remove any previous navigation history
+           };
+
             LeftPanelNavigationView.IsPaneOpen = false;
         }
 
@@ -179,12 +185,6 @@ namespace EldenTracker
                 Name = "Page2NavItem",
                 Content = "Open map",
                 Icon = new BitmapIcon { UriSource = new Uri("ms-appx:///Assets/cross.png") }
-            };
-
-            Page1NavItem.Tapped += (sender, args) =>
-            {
-                contentFrame.Navigate(typeof(Page1));
-                contentFrame.BackStack.Clear(); // Clear back stack to remove any previous navigation history
             };
 
             LeftPanelNavigationView.MenuItems.Add(Page1NavItem);

@@ -10,6 +10,7 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid x:Name="MainGrid">
-
+        <TextBlock Text="А ТЫ ЗНАЛ, ЧТО" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="56" Margin="0, 10, 0, 0"/>
+        <Image Source="ms-appx:///Assets/floppa.jpg" Height="600"/>
     </Grid>
 </Page>
