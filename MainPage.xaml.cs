@@ -4,7 +4,6 @@ using EldenTracker.Resources.PointsOfInterest;
 using System;
 using System.Collections.ObjectModel;
 using System.Threading;
-using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.UI;
 using Windows.UI.Xaml;
@@ -214,18 +213,6 @@ namespace EldenTracker
             Page1NavItem.Tapped += (sender, args) =>
             {
                 contentFrame.Navigate(typeof(Page1));
-                Thread.Sleep(5000);
-                contentFrame.Navigate(typeof(MainPage));
-            };
-
-            Page2NavItem.Tapped += (sender, args) =>
-            {
-                if (contentFrame.CurrentSourcePageType != typeof(MainPage))
-                {
-                    // Reset the ContentFrame to its original state
-                    contentFrame.Navigate(typeof(MainPage));
-                    contentFrame.BackStack.Clear(); // Clear back stack to remove any previous navigation history
-                }
             };
 
             LeftPanelNavigationView.MenuItems.Add(Page1NavItem);
