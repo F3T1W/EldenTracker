@@ -3,6 +3,8 @@ using EldenTracker.Resources.Map;
 using EldenTracker.Resources.PointsOfInterest;
 using System;
 using System.Collections.ObjectModel;
+using System.Threading;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.UI;
 using Windows.UI.Xaml;
@@ -33,7 +35,7 @@ namespace EldenTracker
         {
             InitializeComponent();
 
-            _contentFrame = new Frame(); // Create the Frame instance here or assign the reference from wherever you create it dynamically
+            _contentFrame = Window.Current.Content as Frame;// Create the Frame instance here or assign the reference from wherever you create it dynamically
 
             CreateComponents();
             LinkEvents();
@@ -211,11 +213,9 @@ namespace EldenTracker
 
             Page1NavItem.Tapped += (sender, args) =>
             {
-                if (contentFrame.CurrentSourcePageType != typeof(Page1))
-                {
-                    // Navigate to Page1 if it's not already the current page
-                    contentFrame.Navigate(typeof(Page1));
-                }
+                contentFrame.Navigate(typeof(Page1));
+                Thread.Sleep(5000);
+                contentFrame.Navigate(typeof(MainPage));
             };
 
             Page2NavItem.Tapped += (sender, args) =>
