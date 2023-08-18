@@ -158,33 +158,6 @@ namespace EldenTracker
             LeftPanelNavigationView.IsPaneOpen = false;
         }
 
-        private void LeftPanelNavigationView_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
-        {
-            if (args.IsSettingsInvoked)
-            {
-                // Handle settings invocation if needed
-                return;
-            }
-
-            NavigationViewItem Page1NavItem = sender.MenuItems[0] as NavigationViewItem;
-            NavigationViewItem Page2NavItem = sender.MenuItems[1] as NavigationViewItem;
-
-            if (_contentFrame != null && Page1NavItem != null && Page2NavItem != null)
-            {
-                if (args.InvokedItemContainer == Page1NavItem && _contentFrame.CurrentSourcePageType != typeof(Page1))
-                {
-                    // Navigate to Page1 if it's not already the current page
-                    _contentFrame.Navigate(typeof(Page1));
-                }
-                else if (args.InvokedItemContainer == Page2NavItem && _contentFrame.CurrentSourcePageType != typeof(MainPage))
-                {
-                    // Reset the ContentFrame to its original state
-                    _contentFrame.Navigate(typeof(MainPage));
-                    _contentFrame.BackStack.Clear(); // Clear back stack to remove any previous navigation history
-                }
-            }
-        }
-
         private void CreateNavigationPanel(Frame contentFrame)
         {
             LeftPanelNavigationView = new NavigationView
@@ -193,8 +166,6 @@ namespace EldenTracker
                 Style = (Style)Application.Current.Resources["NavigationViewWithoutAnimation"], // Use Application.Current.Resources to access the styles
                 PaneDisplayMode = NavigationViewPaneDisplayMode.LeftCompact
             };
-
-            LeftPanelNavigationView.ItemInvoked += LeftPanelNavigationView_ItemInvoked;
 
             NavigationViewItem Page1NavItem = new NavigationViewItem
             {
@@ -213,6 +184,7 @@ namespace EldenTracker
             Page1NavItem.Tapped += (sender, args) =>
             {
                 contentFrame.Navigate(typeof(Page1));
+                contentFrame.BackStack.Clear(); // Clear back stack to remove any previous navigation history
             };
 
             LeftPanelNavigationView.MenuItems.Add(Page1NavItem);
