@@ -2,11 +2,12 @@
 using System.ComponentModel;
 using Windows.Foundation;
 
-namespace EldenTracker.Resources.PointsOfInterest
+namespace EldenTracker.Model
 {
-    public class PointOfInterest : INotifyPropertyChanged
+    internal sealed class PointOfInterest : INotifyPropertyChanged
     {
         private string _description;
+        
         public string Description
         {
             get => _description;
@@ -16,30 +17,34 @@ namespace EldenTracker.Resources.PointsOfInterest
                 OnPropertyChanged(nameof(Description));
             }
         }
+        
         public event PropertyChangedEventHandler PropertyChanged;
 
         public Uri ImageSource { get; set; }
+        
         public double XCoordinate { get; set; }
+        
         public double YCoordinate { get; set; }
 
-        public PointOfInterest(Point point, PointOfInterestType type = PointOfInterestType.Default)
+        public enum Type : byte
+        {
+            Default,
+            Custom
+        }
+
+        public PointOfInterest(Point point, Type type = Type.Default)
         {
             XCoordinate = point.X;
             YCoordinate = point.Y;
-            ImageSource = new Uri(GetImagePath(type));
+            ImageSource = GetImageUri(type);
         }
 
-        private string GetImagePath(PointOfInterestType type)
+        private Uri GetImageUri(Type type)
         {
-            switch (type)
-            {
-                case PointOfInterestType.Default:
-                    return "ms-appx:///Resources/PointsOfInterest/Images/DefaultPoint.png";
-                case PointOfInterestType.Custom:
-                    return "ms-appx:///Resources/PointsOfInterest/Images/CustomPoint.png";
-                default:
-                    return string.Empty;
-            }
+            var name = type == Type.Default
+                ? nameof(Type.Default)
+                : nameof(Type.Custom);
+            return new Uri($"ms-appx:///Assets/{name}Point.png");
         }
 
         public void OnPropertyChanged(string propertyName)

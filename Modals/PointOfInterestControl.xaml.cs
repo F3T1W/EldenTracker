@@ -2,10 +2,11 @@
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
+using EldenTracker.Model;
 
-namespace EldenTracker.Resources.PointsOfInterest
+namespace EldenTracker.Modals
 {
-    public sealed partial class PointOfInterestControl : UserControl
+    internal sealed partial class PointOfInterestControl : UserControl
     {
         public event EventHandler<PointOfInterest> PointOfInterestClicked;
 
@@ -39,10 +40,9 @@ namespace EldenTracker.Resources.PointsOfInterest
         public PointOfInterestControl()
         {
             InitializeComponent();
-            Tapped += PointOfInterestControl_Tapped;
         }
 
-        private void PointOfInterestControl_Tapped(object sender, TappedRoutedEventArgs e)
+        private void OnTapped(object sender, TappedRoutedEventArgs e)
         {
             var poi = DataContext as PointOfInterest;
 
