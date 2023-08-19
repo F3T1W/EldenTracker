@@ -15,14 +15,14 @@ namespace EldenTracker
 
         private void OnItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
         {
-            var content = args.InvokedItem;
             Type requestedPage;
+            var content = args.InvokedItem;
 
-            if (content == WikiItem.Content)
+            if (content.Equals(WikiItem.Content))
             {
                 requestedPage = typeof(WikiPage);
             }
-            else if (content == MapItem.Content)
+            else if (content.Equals(MapItem.Content))
             {
                 requestedPage = typeof(MapPage);
             } 

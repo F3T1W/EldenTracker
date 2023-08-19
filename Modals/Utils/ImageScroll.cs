@@ -5,6 +5,8 @@ using Windows.UI.Xaml.Input;
 
 namespace EldenTracker.Modals.Utils 
 { 
+    // кринж что это в Utils, поместил сюда просто, чтобы где-то было
+    // по факту это custom UserControl (условный ScrollableImage), который просто в XAML размещается
     internal sealed class ImageScroll
     {
         private readonly Image _image;
