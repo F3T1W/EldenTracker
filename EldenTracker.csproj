@@ -119,17 +119,24 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Modals\MapPage.xaml.cs">
+      <DependentUpon>MapPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Modals\Popups\PointDialog.xaml.cs">
+      <DependentUpon>PointDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modals\WikiPage.xaml.cs">
+      <DependentUpon>WikiPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Resources\Map\Map.cs" />
-    <Compile Include="Resources\MenuButton\MenuButton.cs" />
-    <Compile Include="Resources\PointsOfInterest\PointOfInterest.cs" />
-    <Compile Include="Resources\PointsOfInterest\PointOfInterestControl.xaml.cs">
+    <Compile Include="Modals\Utils\ImageScroll.cs" />
+    <Compile Include="Model\PointOfInterest.cs" />
+    <Compile Include="Modals\PointOfInterestControl.xaml.cs">
       <DependentUpon>PointOfInterestControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Resources\PointsOfInterest\PointOfInterestType.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -142,6 +149,10 @@
     <Content Include="Assets\BadgeLogo.scale-150.png" />
     <Content Include="Assets\BadgeLogo.scale-200.png" />
     <Content Include="Assets\BadgeLogo.scale-400.png" />
+    <Content Include="Assets\cross.png" />
+    <Content Include="Assets\floppa.jpg" />
+    <Content Include="Assets\wiki.png" />
+    <Content Include="Assets\settings.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -150,20 +161,32 @@
     <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
     <Content Include="Assets\StoreLogo.png" />
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
-    <Content Include="Resources\Map\Images\FullMap.png" />
-    <Content Include="Resources\PointsOfInterest\Images\CustomPoint.png" />
-    <Content Include="Resources\PointsOfInterest\Images\DefaultPoint.png" />
+    <Content Include="Assets\FullMap.png" />
+    <Content Include="Assets\CustomPoint.png" />
+    <Content Include="Assets\DefaultPoint.png" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Modals\MapPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Resources\PointsOfInterest\PointOfInterestControl.xaml">
+    <Page Include="Modals\Popups\PointDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modals\WikiPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modals\PointOfInterestControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
