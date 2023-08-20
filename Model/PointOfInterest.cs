@@ -1,6 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
-using Windows.Foundation;
+using System.Numerics;
 
 namespace EldenTracker.Model
 {
@@ -32,24 +32,24 @@ namespace EldenTracker.Model
             Custom
         }
 
-        public PointOfInterest(Point point, Type type = Type.Default)
+        public PointOfInterest(Vector2 translate, Type type = Type.Default)
         {
-            XCoordinate = point.X;
-            YCoordinate = point.Y;
+            XCoordinate = translate.X;
+            YCoordinate = translate.Y;
             ImageSource = GetImageUri(type);
-        }
-
-        private Uri GetImageUri(Type type)
-        {
-            var name = type == Type.Default
-                ? nameof(Type.Default)
-                : nameof(Type.Custom);
-            return new Uri($"ms-appx:///Assets/{name}Point.png");
         }
 
         public void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private static Uri GetImageUri(Type type)
+        {
+            var name = type == Type.Default
+                ? nameof(Type.Default)
+                : nameof(Type.Custom);
+            return new Uri($"ms-appx:///Assets/{name}Point.png");
         }
     }
 }
