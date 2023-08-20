@@ -1,6 +1,6 @@
 ﻿using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
-using EldenTracker.Modals;
+using EldenTracker.UI.Pages;
 using System;
 
 namespace EldenTracker
@@ -15,14 +15,14 @@ namespace EldenTracker
 
         private void OnItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
         {
+            var tag = args.InvokedItem as string;
+            
             Type requestedPage;
-            var content = args.InvokedItem;
-
-            if (content.Equals(WikiItem.Content))
+            if (tag == TagOf(WikiItem))
             {
                 requestedPage = typeof(WikiPage);
             }
-            else if (content.Equals(MapItem.Content))
+            else if (tag == TagOf(MapItem))
             {
                 requestedPage = typeof(MapPage);
             } 
@@ -37,5 +37,7 @@ namespace EldenTracker
             };
             ContentFrame.NavigateToType(requestedPage, null, options);
         }
+
+        private string TagOf(NavigationViewItem item) => item.Content as string;
     }
 }
