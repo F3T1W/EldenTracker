@@ -47,9 +47,6 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        <Style TargetType="ContentDialog">
-            <Setter Property="Background" Value="Black"/>
-        </Style>
     </Page.Resources>
 
     <NavigationView x:Name="NavigationBar"
@@ -59,7 +56,7 @@
                     AlwaysShowHeader="False"
                     PaneTitle="EldenTracker"
                     PaneDisplayMode="LeftCompact"
-                    ExpandedModeThresholdWidth="200"
+                    ExpandedModeThresholdWidth="130"
                     SelectionFollowsFocus="Disabled"
                     IsTabStop="False"
                     IsPaneOpen="False"
@@ -72,13 +69,13 @@
                     <BitmapIcon UriSource="ms-appx:///Assets/wiki.png"/>
                 </NavigationViewItem.Icon>
             </NavigationViewItem>
+            
             <NavigationViewItem x:Name="MapItem" 
                                 Content="Open map">
                 <NavigationViewItem.Icon>
                     <BitmapIcon UriSource="ms-appx:///Assets/cross.png"/>
                 </NavigationViewItem.Icon>
             </NavigationViewItem>
-            
         </NavigationView.MenuItems>
 
         <Frame x:Name="ContentFrame"/>

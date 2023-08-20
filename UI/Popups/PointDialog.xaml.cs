@@ -1,14 +1,14 @@
 ﻿using System;
 using Windows.UI.Xaml.Controls;
 
-namespace EldenTracker.Modals.Popups
+namespace EldenTracker.UI.Popups
 {
     internal sealed partial class PointDialog : ContentDialog
     {
-        public PointDialog(Uri imageSource)
+        public PointDialog(Uri iconSource)
         {
             InitializeComponent();
-            PointIcon.UriSource = imageSource;
+            PointIcon.UriSource = iconSource;
         }
 
         private void OnOKClicked(ContentDialog sender, ContentDialogButtonClickEventArgs args)

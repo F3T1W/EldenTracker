@@ -119,23 +119,25 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Modals\MapPage.xaml.cs">
+    <Compile Include="UI\Controls\ScrollableImage.xaml.cs">
+      <DependentUpon>ScrollableImage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Pages\MapPage.xaml.cs">
       <DependentUpon>MapPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Modals\Popups\PointDialog.xaml.cs">
+    <Compile Include="UI\Popups\PointDialog.xaml.cs">
       <DependentUpon>PointDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Modals\WikiPage.xaml.cs">
+    <Compile Include="UI\Pages\WikiPage.xaml.cs">
       <DependentUpon>WikiPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Modals\Utils\ImageScroll.cs" />
     <Compile Include="Model\PointOfInterest.cs" />
-    <Compile Include="Modals\PointOfInterestControl.xaml.cs">
-      <DependentUpon>PointOfInterestControl.xaml</DependentUpon>
+    <Compile Include="UI\Controls\PointOfInterest.xaml.cs">
+      <DependentUpon>PointOfInterest.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -170,7 +172,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Modals\MapPage.xaml">
+    <Page Include="UI\Controls\ScrollableImage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Pages\MapPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -178,15 +184,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Modals\Popups\PointDialog.xaml">
+    <Page Include="UI\Popups\PointDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Modals\WikiPage.xaml">
+    <Page Include="UI\Pages\WikiPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Modals\PointOfInterestControl.xaml">
+    <Page Include="UI\Controls\PointOfInterest.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
