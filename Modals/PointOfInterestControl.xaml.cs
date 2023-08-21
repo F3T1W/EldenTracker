@@ -2,22 +2,22 @@
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
-using Windows.Devices.Input;
+using EldenTracker.Model;
 
-namespace EldenTracker.UI.Controls
+namespace EldenTracker.Modals
 {
-    internal sealed partial class PointOfInterest : UserControl
+    internal sealed partial class PointOfInterestControl : UserControl
     {
-        public event EventHandler<Model.PointOfInterest> Clicked;
+        public event EventHandler<PointOfInterest> PointOfInterestClicked;
 
         public static readonly DependencyProperty ImageSourceProperty =
-            DependencyProperty.Register("ImageSource", typeof(string), typeof(PointOfInterest), new PropertyMetadata(null));
+            DependencyProperty.Register("ImageSource", typeof(string), typeof(PointOfInterestControl), new PropertyMetadata(null));
 
         public static readonly DependencyProperty XCoordinateProperty =
-            DependencyProperty.Register("XCoordinate", typeof(double), typeof(Model.PointOfInterest), new PropertyMetadata(0.0));
+            DependencyProperty.Register("XCoordinate", typeof(double), typeof(PointOfInterest), new PropertyMetadata(0.0));
 
         public static readonly DependencyProperty YCoordinateProperty =
-            DependencyProperty.Register("YCoordinate", typeof(double), typeof(Model.PointOfInterest), new PropertyMetadata(0.0));
+            DependencyProperty.Register("YCoordinate", typeof(double), typeof(PointOfInterest), new PropertyMetadata(0.0));
 
         public string ImageSource
         {
@@ -37,18 +37,18 @@ namespace EldenTracker.UI.Controls
             set { SetValue(YCoordinateProperty, value); }
         }
 
-        public PointOfInterest()
+        public PointOfInterestControl()
         {
             InitializeComponent();
         }
 
         private void OnTapped(object sender, TappedRoutedEventArgs e)
         {
-            var point = DataContext as Model.PointOfInterest;
-            
-            if (point != null && e.PointerDeviceType == PointerDeviceType.Mouse)
+            var poi = DataContext as PointOfInterest;
+
+            if (poi != null && e.PointerDeviceType == Windows.Devices.Input.PointerDeviceType.Mouse)
             {
-                Clicked?.Invoke(this, point);
+                PointOfInterestClicked?.Invoke(this, poi);
             }
         }
     }
