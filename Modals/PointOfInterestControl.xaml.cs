@@ -1,55 +1,52 @@
 ﻿using System;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using EldenTracker.Model;
 
-namespace EldenTracker.Modals
+namespace EldenTracker.Modals;
+
+internal sealed partial class PointOfInterestControl
 {
-    internal sealed partial class PointOfInterestControl : UserControl
+    public event EventHandler<PointOfInterest> PointOfInterestClicked;
+
+    public static readonly DependencyProperty ImageSourceProperty =
+        DependencyProperty.Register(nameof(ImageSource), typeof(string), typeof(PointOfInterestControl),
+            new PropertyMetadata(null));
+
+    public static readonly DependencyProperty XCoordinateProperty =
+        DependencyProperty.Register(nameof(XCoordinate), typeof(double), typeof(PointOfInterest),
+            new PropertyMetadata(0.0));
+
+    public static readonly DependencyProperty YCoordinateProperty =
+        DependencyProperty.Register(nameof(YCoordinate), typeof(double), typeof(PointOfInterest),
+            new PropertyMetadata(0.0));
+
+    public string ImageSource
     {
-        public event EventHandler<PointOfInterest> PointOfInterestClicked;
+        get => (string)GetValue(ImageSourceProperty);
+        set => SetValue(ImageSourceProperty, value);
+    }
 
-        public static readonly DependencyProperty ImageSourceProperty =
-            DependencyProperty.Register("ImageSource", typeof(string), typeof(PointOfInterestControl), new PropertyMetadata(null));
+    public double XCoordinate
+    {
+        get => (double)GetValue(XCoordinateProperty);
+        set => SetValue(XCoordinateProperty, value);
+    }
 
-        public static readonly DependencyProperty XCoordinateProperty =
-            DependencyProperty.Register("XCoordinate", typeof(double), typeof(PointOfInterest), new PropertyMetadata(0.0));
+    public double YCoordinate
+    {
+        get => (double)GetValue(YCoordinateProperty);
+        set => SetValue(YCoordinateProperty, value);
+    }
 
-        public static readonly DependencyProperty YCoordinateProperty =
-            DependencyProperty.Register("YCoordinate", typeof(double), typeof(PointOfInterest), new PropertyMetadata(0.0));
+    public PointOfInterestControl() => InitializeComponent();
 
-        public string ImageSource
+    private void OnTapped(object sender, TappedRoutedEventArgs e)
+    {
+        if (DataContext is PointOfInterest poi && e.PointerDeviceType ==
+            Windows.Devices.Input.PointerDeviceType.Mouse)
         {
-            get { return (string)GetValue(ImageSourceProperty); }
-            set { SetValue(ImageSourceProperty, value); }
-        }
-
-        public double XCoordinate
-        {
-            get { return (double)GetValue(XCoordinateProperty); }
-            set { SetValue(XCoordinateProperty, value); }
-        }
-
-        public double YCoordinate
-        {
-            get { return (double)GetValue(YCoordinateProperty); }
-            set { SetValue(YCoordinateProperty, value); }
-        }
-
-        public PointOfInterestControl()
-        {
-            InitializeComponent();
-        }
-
-        private void OnTapped(object sender, TappedRoutedEventArgs e)
-        {
-            var poi = DataContext as PointOfInterest;
-
-            if (poi != null && e.PointerDeviceType == Windows.Devices.Input.PointerDeviceType.Mouse)
-            {
-                PointOfInterestClicked?.Invoke(this, poi);
-            }
+            PointOfInterestClicked?.Invoke(this, poi);
         }
     }
 }

@@ -21,8 +21,7 @@
                    Stretch="Uniform"
                    RightTapped="OnRightTapped"/>
             
-            <ItemsControl x:Name="PointsControl"
-                          ItemsSource="{x:Bind PointsOfInterest}">
+            <ItemsControl ItemsSource="{x:Bind PointsOfInterest}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate x:DataType="model:PointOfInterest">
                         <local:PointOfInterestControl ImageSource="{x:Bind ImageSource}" 

@@ -3,39 +3,38 @@ using Windows.UI.Xaml.Navigation;
 using EldenTracker.Modals;
 using System;
 
-namespace EldenTracker
+namespace EldenTracker;
+
+public sealed partial class MainPage : Page
 {
-    public sealed partial class MainPage : Page
+    public MainPage()
     {
-        public MainPage()
-        {
-            InitializeComponent();
-            ContentFrame.Navigate(typeof(MapPage));
-        }
+        InitializeComponent();
+        ContentFrame.Navigate(typeof(MapPage));
+    }
 
-        private void OnItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
-        {
-            Type requestedPage;
-            var content = args.InvokedItem;
+    private void OnItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
+    {
+        Type requestedPage;
+        object content = args.InvokedItem;
 
-            if (content.Equals(WikiItem.Content))
-            {
-                requestedPage = typeof(WikiPage);
-            }
-            else if (content.Equals(MapItem.Content))
-            {
-                requestedPage = typeof(MapPage);
-            } 
-            else
-            {
-                throw new InvalidOperationException("Unknown navigation item");
-            }
-            var options = new FrameNavigationOptions()
-            {
-                TransitionInfoOverride = args.RecommendedNavigationTransitionInfo,
-                IsNavigationStackEnabled = false
-            };
-            ContentFrame.NavigateToType(requestedPage, null, options);
+        if (content.Equals(WikiItem.Content))
+        {
+            requestedPage = typeof(WikiPage);
         }
+        else if (content.Equals(MapItem.Content))
+        {
+            requestedPage = typeof(MapPage);
+        } 
+        else
+        {
+            throw new InvalidOperationException("Unknown navigation item");
+        }
+        var options = new FrameNavigationOptions()
+        {
+            TransitionInfoOverride = args.RecommendedNavigationTransitionInfo,
+            IsNavigationStackEnabled = false
+        };
+        ContentFrame.NavigateToType(requestedPage, null, options);
     }
 }
